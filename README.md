@@ -39,8 +39,9 @@ The sidebar contains sliders for all 30 tumor features, and the main section dis
 > 🖼️ *Replace this placeholder with a screenshot of your running app.*
 
 <div align="center">
-  <img src="https://placehold.co/800x500/ffffff/333333?text=App+Screenshot+Here&font=inter" alt="Breast Cancer App Screenshot" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+  <img src="app_screenshot.png" alt="Breast Cancer App Screenshot" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
 </div>
+<img width="1920" height="912" alt="{1BA124DB-4BAA-4771-82AD-1B544C65E29C}" src="https://github.com/user-attachments/assets/9ec4c1ce-e171-4641-8cbc-1139887df46d" />
 
 ---
 
