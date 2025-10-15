@@ -94,30 +94,40 @@ if model is not None:
     # Ensure the column order is the same as the model was trained on
     try:
         feature_names = model.feature_names_in_
-        input_df_ordered = input_df[feature_names]
-    except AttributeError:
-        st.warning("Could not verify feature names from the model. Assuming the order is correct.")
-        input_df_ordered = input_df
+        
+        # Create a copy for prediction to avoid altering the displayed dataframe
+        prediction_df = input_df.copy()
 
-    # Make prediction
-    prediction = model.predict(input_df_ordered)
-    prediction_proba = model.predict_proba(input_df_ordered)
+        # WORKAROUND: The saved model expects an 'id' column that was likely in the
+        # training data but is not a predictive feature. We add a placeholder
+        # column to match the model's expected input shape.
+        if 'id' in feature_names and 'id' not in prediction_df.columns:
+            prediction_df['id'] = 0 # Add a dummy 'id' column with a placeholder value
 
-    # Display result using Streamlit's native components for a cleaner look
-    if prediction[0] == 'B':
-        st.success(f"**Prediction: Benign (Non-Cancerous)**")
-        st.metric(label="Confidence", value=f"{prediction_proba[0][0]*100:.2f}%")
-        st.info(
-            "**Disclaimer:** This is a prediction from a machine learning model and should not be considered a medical diagnosis. "
-            "Always consult a qualified healthcare professional for medical advice."
-        )
-    else:
-        st.error(f"**Prediction: Malignant (Cancerous)**")
-        st.metric(label="Confidence", value=f"{prediction_proba[0][1]*100:.2f}%")
-        st.warning(
-            "**Disclaimer:** This is a prediction from a machine learning model and should not be considered a medical diagnosis. "
-            "Always consult a qualified healthcare professional for medical advice."
-        )
+        input_df_ordered = prediction_df[feature_names]
+        
+        # Make prediction
+        prediction = model.predict(input_df_ordered)
+        prediction_proba = model.predict_proba(input_df_ordered)
+
+        # Display result using Streamlit's native components for a cleaner look
+        if prediction[0] == 'B':
+            st.success(f"**Prediction: Benign (Non-Cancerous)**")
+            st.metric(label="Confidence", value=f"{prediction_proba[0][0]*100:.2f}%")
+            st.info(
+                "**Disclaimer:** This is a prediction from a machine learning model and should not be considered a medical diagnosis. "
+                "Always consult a qualified healthcare professional for medical advice."
+            )
+        else:
+            st.error(f"**Prediction: Malignant (Cancerous)**")
+            st.metric(label="Confidence", value=f"{prediction_proba[0][1]*100:.2f}%")
+            st.warning(
+                "**Disclaimer:** This is a prediction from a machine learning model and should not be considered a medical diagnosis. "
+                "Always consult a qualified healthcare professional for medical advice."
+            )
+    except Exception as e:
+        st.error(f"An error occurred during prediction: {e}")
+
 else:
     st.error("Model could not be loaded. Prediction cannot be performed.")
 
