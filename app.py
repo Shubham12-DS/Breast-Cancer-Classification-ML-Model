@@ -28,17 +28,6 @@ def load_model():
 
 model = load_model()
 
-# --- STYLING ---
-def local_css(file_name):
-    """Loads a local CSS file."""
-    try:
-        with open(file_name) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-    except FileNotFoundError:
-        st.error(f"CSS file '{file_name}' not found. Please make sure it's in the same directory as the app.")
-
-local_css("style.css")
-
 
 # --- SIDEBAR FOR INPUTS ---
 st.sidebar.header("🔬 Input Tumor Features")
