@@ -36,12 +36,11 @@ This project demonstrates a practical application of **data science, machine lea
 Below is a glimpse of the application layout.  
 The sidebar contains sliders for all 30 tumor features, and the main section displays the classification result and confidence score in real time.
 
-> 🖼️ *Replace this placeholder with a screenshot of your running app.*
 
 <div align="center">
-  <img src="app_screenshot.png" alt="Breast Cancer App Screenshot" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+  <img width="1920" height="912" alt="{1BA124DB-4BAA-4771-82AD-1B544C65E29C}" src="https://github.com/user-attachments/assets/9ec4c1ce-e171-4641-8cbc-1139887df46d" />
+
 </div>
-<img width="1920" height="912" alt="{1BA124DB-4BAA-4771-82AD-1B544C65E29C}" src="https://github.com/user-attachments/assets/9ec4c1ce-e171-4641-8cbc-1139887df46d" />
 
 ---
 
